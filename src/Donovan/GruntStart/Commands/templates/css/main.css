@@ -1,0 +1,174 @@
+
+@import url(//fonts.googleapis.com/css?family=Lato:300,400,700);
+
+body {
+  padding-top: 50px;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+footer {
+  background-color: #2f2f2f;
+  border-top: 1px solid #c5c5c5;
+  padding-top: 10px;  
+  color: #999
+}
+
+footer a{
+  color: #ffffff;
+
+}
+fieldset {
+  margin-bottom: 50px;
+}
+.navbar{
+  opacity: .9;
+}
+
+/* Wrapper for page content to push down footer */
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+.main-content{
+ padding-top: 10px; /* really should be dynamic to navbar height */
+ padding-bottom: 50px;
+
+}
+
+.panel.registration .panel-heading{
+    padding: 40px
+}
+.form-hidden{
+
+  display: none;
+}
+.form-reset  {
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin  {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.section-header {
+  padding-bottom: 9px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.jumbotron {
+
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  position: relative;
+  background: none;
+  color: #ffffff;
+}
+/*- additional JT settings to limit the size of our box. 
+.jumbotron {
+  margin-bottom: 0px;
+  height: 400px;
+  overflow: hidden;
+}
+*/
+.jumbotron > .container > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  z-index: -1;
+}
+.jumbotron:after {
+     content:"";
+     background: url('../img/camera-man.jpg'); 
+     background-repeat:no-repeat;
+     background-size: cover;
+     background-position: center;
+     opacity: 0.9;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     position: absolute;
+     z-index: -1;
+ }
+
+.jumbotron p {
+  color: #d8d8d8;
+}
+
+.jumbotron .jum-header{
+ padding-top: 40px;
+}
+.jumbotron .jum-body{
+  padding-top: 80px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+
+}
+.jumbotron .jum-footer{
+  padding-top: 80px;
+  padding-bottom: 5px;
+
+  text-align:center;
+}
+
+
+/* basically commented out but kept as an example as a gradient fade on an image.  */
+  .kjumbotron:after {
+          background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1)), url('../img/camera-man.jpg'); 
+          background-size:cover;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          content: "";
+          display: block;
+          position: absolute;
+          z-index: 2;
+
+
+
+

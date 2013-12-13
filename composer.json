@@ -1,0 +1,20 @@
+{
+    "name": "donovan/grunt-start",
+    "description": "",
+    "authors": [
+        {
+            "name": "David Donovan",
+            "email": "ddonovan.98@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "Donovan\\GruntStart": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "laravel_bootstrap",
+  "version": "0.0.1",
+  "description": "Default Bower configuration for basic assets",
+  "authors": [
+    "David Donovan"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "acme/assets/new_location",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "font-awesome": "~4.0.3"
+  }
+}
+

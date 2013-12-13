@@ -1,0 +1,205 @@
+/* jshint node: true */
+
+module.exports = function(grunt) {
+  "use strict";
+
+  // Force use of Unix newlines
+  grunt.util.linefeed = '\n';
+
+  RegExp.quote = require('regexp-quote')
+  var btoa = require('btoa')
+  // Project configuration.
+  grunt.initConfig({
+
+    // Metadata.
+    pkg: grunt.file.readJSON('package.json'),
+    banner: '/*!\n' +
+              ' * Bootstrap v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+              ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+              ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
+              ' */\n\n',
+    jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }\n\n',
+
+  
+    assetsFolder: {{ASSETS_FOLDER}},
+    bootstrapFolder: {{BOOTSTRAP_FOLDER}},
+
+    // Task configuration.
+    clean: {
+      dist: ['<%= assetsFolder %>dist']
+    },
+
+    jshint: {
+      options: {
+     
+            "asi"      : true,
+            "boss"     : true,
+            "browser"  : true,
+            "curly"    : false,
+            "debug"    : true,
+            "devel"    : true,
+            "eqeqeq"   : false,
+            "eqnull"   : true,
+            "expr"     : true,
+            "laxbreak" : true,
+            "laxcomma" : true,
+            "validthis": true
+          
+      },
+      gruntfile: {
+        src: 'Gruntfile.js'
+      },
+      src: {
+        src: ['<%= assetsFolder %>js/*.js']
+      },
+      bootstrap:{
+        src: ['<%= bootstrapFolder %>js/*.js']
+      }
+    },
+
+    concat: {
+      options: {
+        banner: '<%= banner %><%= jqueryCheck %>',
+        stripBanners: false
+      },
+      assets: {
+        src: ['<%= assetsFolder %>js/*.js'],
+        dest: '<%= assetsFolder %>dist/js/project.js'
+      },
+      bootstrap: {
+        src: [
+          '<%= bootstrapFolder %>js/transition.js',
+          '<%= bootstrapFolder %>js/alert.js',
+          '<%= bootstrapFolder %>js/button.js',
+          '<%= bootstrapFolder %>js/carousel.js',
+          '<%= bootstrapFolder %>js/collapse.js',
+          '<%= bootstrapFolder %>js/dropdown.js',
+          '<%= bootstrapFolder %>js/modal.js',
+          '<%= bootstrapFolder %>js/tooltip.js',
+          '<%= bootstrapFolder %>js/popover.js',
+          '<%= bootstrapFolder %>js/scrollspy.js',
+          '<%= bootstrapFolder %>js/tab.js',
+          '<%= bootstrapFolder %>js/affix.js'
+        ],
+        dest: '<%= assetsFolder %>dist/js/<%= pkg.name %>.js'
+      }
+    },
+
+    uglify: {
+      options: {
+        banner: '<%= banner %>',
+        report: 'min'
+      },
+      assets: {
+        src: ['<%= concat.assets.dest %>'],
+        dest: '<%= assetsFolder %>dist/js/project.min.js'
+      },
+      bootstrap: {
+        src: ['<%= concat.bootstrap.dest %>'],
+        dest: '<%= assetsFolder %>dist/js/<%= pkg.name %>.min.js'
+      }
+    },
+
+    recess: {
+      options: {
+        compile: true,
+        banner: '<%= banner %>'
+       
+      },
+      bootstrap: {
+        src: ['<%= assetsFolder %>less/bootstrap.less'],
+        dest: '<%= assetsFolder %>dist/css/<%= pkg.name %>.css'
+      },
+      min: {
+        options: {
+          compress: true      
+        },
+        src: ['<%= assetsFolder %>less/bootstrap.less'],
+        dest: '<%= assetsFolder %>dist/css/<%= pkg.name %>.min.css'
+      }
+    },
+
+    copy: {
+      bootstrap: {
+        cwd: '<%= bootstrapFolder %>',
+        expand: true,
+        src: ["fonts/*"],
+        dest: '<%= assetsFolder %>dist/'
+      },
+       project: {
+        cwd: '<%= assetsFolder %>',
+        expand: true,
+        src: ['fonts/**',
+        'ico/**',
+        'images/**',
+        'js/**'],
+        dest: '<%= assetsFolder %>dist/'
+      }
+ 
+    },
+
+
+    connect: {
+      server: {
+        options: {
+          port: 3000,
+          base: '.'
+        }
+      }
+    },
+
+
+    watch: {
+      src: {
+        files: '<%= jshint.src.src %>',
+        tasks: ['jshint:src', 'qunit']
+      },
+      test: {
+        files: '<%= jshint.test.src %>',
+        tasks: ['jshint:test', 'qunit']
+      },
+      recess: {
+        files: '<%= assetsFolder %>less/*.less',
+        tasks: ['recess']
+      }
+    },
+
+
+
+
+  });
+
+
+  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-recess');
+
+
+  // JS distribution task.
+  grunt.registerTask('dist-js', ['jshint','concat', 'uglify']);
+
+  // CSS distribution task.
+  grunt.registerTask('dist-css', ['recess']);
+
+  // Fonts distribution task.
+  grunt.registerTask('dist-fonts', ['copy']);
+
+  grunt.registerTask('dist-clean', ['clean']);
+
+  // Full distribution task.
+  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-fonts', 'dist-js']);
+
+  // Default task.
+  grunt.registerTask('default', ['dist']);
+
+  //grunt.registerTask('default', ['test', 'dist', 'build-customizer']);
+
+
+
+};
