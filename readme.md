@@ -3,7 +3,7 @@ This Laravel 4 package provides a quick way to integrate Twitter Bootstrap using
 - `bbg:publish`
 - `bbg:install`
 
-
+more coming
 
 
 ## Installation
