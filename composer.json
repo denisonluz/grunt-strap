@@ -1,5 +1,5 @@
 {
-    "name": "donovan/grunt-start",
+    "name": "donovan/grunt-strap",
     "description": "",
     "authors": [
         {
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Donovan\\GruntStart": "src/"
+            "Donovan\\GruntStrap": "src/"
         }
     },
     "minimum-stability": "dev"

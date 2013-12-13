@@ -1,4 +1,4 @@
-<?php namespace Donovan\GruntStart\Commands;
+<?php namespace Donovan\GruntStrap\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;

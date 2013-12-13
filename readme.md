@@ -2,17 +2,17 @@ This Laravel 4 package provides a quick way to integrate Twitter Bootstrap using
 
 - `bbg:publish`
 - `bbg:install`
-- `bbg:run`
+
 
 
 
 ## Installation
 
-* 1 by installing this package through Composer. Edit your project's `composer.json` file to require `donovan/grunt-start`.
+* 1 by installing this package through Composer. Edit your project's `composer.json` file to require `donovan/grunt-strap`.
 
 	"require": {
 		"laravel/framework": "4.0.*",
-		"donovan/grunt-start": "dev-master"
+		"donovan/grunt-strap": "dev-master"
 	},
 	"minimum-stability" : "dev"
 
@@ -24,7 +24,7 @@ This Laravel 4 package provides a quick way to integrate Twitter Bootstrap using
 
 * 3 Open `app/config/app.php`, and add a new item to the providers array.
 
-     'Donovan\GruntStart\GruntStartServiceProvider'
+     'Donovan\GruntStrap\GruntStrapServiceProvider'
 
 * 4 You should now be able to verify everything is installed by running
 
@@ -32,7 +32,6 @@ This Laravel 4 package provides a quick way to integrate Twitter Bootstrap using
     
 ## Usage
 
-Think of generators as an easy way to speed up your workflow. Rather than opening the models directory, creating a new file, saving it, and adding the class, you can simply run a single generate command.
 
 - [bbg:publish](#publish)
 
@@ -66,7 +65,7 @@ this will also instruct **Bower** to install all components into the **app/asset
 
 the **bootstrap** less file is now your new bootstrap manifest file to control which components of bootstrap to compile, as well as adding your own less files, mixins, and overriding bootstrap variables. 
 
-billing.js is a Stripe Billing file for processing my billing forms. 
+
 
 
 

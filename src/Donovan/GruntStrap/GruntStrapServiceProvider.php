@@ -1,10 +1,10 @@
-<?php namespace Donovan\GruntStart;
+<?php namespace Donovan\GruntStrap;
 
 
-use Donovan\GruntStart\Commands;
+use Donovan\GruntStrap\Commands;
 use Illuminate\Support\ServiceProvider;
 
-class GruntStartServiceProvider extends ServiceProvider {
+class GruntStrapServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -55,7 +55,7 @@ class GruntStartServiceProvider extends ServiceProvider {
 
 	public function boot(){
 
-		$this->package('donovan/grunt-start');
+		$this->package('donovan/grunt-strap');
 	}
 
 	/**
