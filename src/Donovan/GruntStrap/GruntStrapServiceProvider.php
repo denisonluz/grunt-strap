@@ -38,7 +38,7 @@ class GruntStrapServiceProvider extends ServiceProvider {
 			$bower_generator = new Commands\BowerGenerator($app['files']);
 			$grunt_generator = new Commands\GruntGenerator($app['files']);
 
-			return new Commands\BowerPublishCommand($bower_generator,$grunt_generator);
+			return new Commands\PublishCommand($bower_generator,$grunt_generator);
 		});
 	}
 
@@ -48,7 +48,7 @@ class GruntStrapServiceProvider extends ServiceProvider {
 		{	
 			
 
-			return new Commands\BowerInstallCommand();
+			return new Commands\InstallCommand();
 		});
 	}
 

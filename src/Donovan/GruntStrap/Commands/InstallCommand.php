@@ -4,7 +4,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class BowerInstallCommand extends Command {
+class InstallCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -19,7 +19,7 @@ class BowerInstallCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Runs bower install';
+	protected $description = 'Runs Bower & Grunt install';
 
 	/**
 	 * Create a new command instance.
@@ -41,9 +41,15 @@ class BowerInstallCommand extends Command {
 	public function fire()
 	{
 		//
-		$this->info('Installing bower dependencies...');
+		$this->info('Installing Bower packages...');
 		$this->info(shell_exec('bower install'));
+		$this->info('Installing Grunt dependencies...');
 		$this->info(shell_exec('sudo npm install'));
+		$this->info('Running Grunt...');
+		$this->info(shell_exec('grunt'));
+
+		
+
 	}
 
 	

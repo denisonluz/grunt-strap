@@ -1,7 +1,7 @@
 {
-  "name": "laravel_bootstrap",
-  "version": "0.0.1",
-  "description": "Default Bower configuration for basic assets",
+  "name": "grunt_strap",
+  "version": "0.0.5",
+  "description": "Bootstrap package with Font-Awesome",
   "authors": [
     "David Donovan"
   ],
@@ -9,11 +9,7 @@
   "private": true,
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
-    "acme/assets/new_location",
-    "test",
-    "tests"
+    "node_modules"
   ],
   "dependencies": {
     "bootstrap": "~3.0.3",

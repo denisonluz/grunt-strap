@@ -85,21 +85,21 @@ class GruntGenerator {
 
 		$this->file->put($path.'/less/bootstrap.less',$template );
 
-		//$this->file->copy($path,__DIR__.'/templates/less/sample.less');
+
+		$this->file->append($path.'/less/bootstrap.less', '@import "sample.less";');
+		
 
 	}
 	private function createGruntFile($path, $bower_folder){
 	
 		
 		$template = $this->file->get(__DIR__.'/templates/gruntfile.txt');
-		$template = str_replace("{{ASSETS_FOLDER}}", '"'.$path.'/"', $template);
+		$template = str_replace("{{ASSETS_FOLDER}}", $path, $template);
+		$template = str_replace("{{BOWER_FOLDER}}", $bower_folder, $template);
 
-		$bootstrap_path = '"'.$path.'/'.$bower_folder .'/bootstrap/"';
-		if(isset($bootstrap_path)){
 
-			$template = str_replace("{{BOOTSTRAP_FOLDER}}", $bootstrap_path, $template);
-		}
 		
+
 		$this->file->put($this->gruntFile,$template );
 
 	}

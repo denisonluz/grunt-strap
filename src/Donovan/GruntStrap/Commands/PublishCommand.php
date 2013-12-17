@@ -5,7 +5,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class BowerPublishCommand extends Command {
+class PublishCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -59,8 +59,21 @@ class BowerPublishCommand extends Command {
 	{
 		//calculate file name and path, 
 
+
+
 		$assets_path = $this->argument('assets_path');
 		$bower_folder = $this->argument('bower_folder');
+			
+		
+		if (empty($assets_path) || empty($bower_folder)) {
+	
+			$assets_path = $this->ask('Enter a path where you want your assets folders ? ');
+			$bower_folder = $this->ask('Enter a folder name to place Bower components in.');
+			
+			
+
+		}
+	
 		// generate bower file. 
 		// 
 		if($this->bower->fileExists()){
@@ -138,8 +151,8 @@ class BowerPublishCommand extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('assets_path', InputArgument::REQUIRED, 'Path where you want you assets installed.'),
-			array('bower_folder', InputArgument::REQUIRED, 'Folder name where Bower components will be installed.'),
+			array('assets_path', InputArgument::OPTIONAL, 'Path where you want you assets installed.'),
+			array('bower_folder', InputArgument::OPTIONAL, 'Folder name where Bower components will be installed.'),
 		);
 	}
 

@@ -6,27 +6,31 @@ module.exports = function(grunt) {
   // Force use of Unix newlines
   grunt.util.linefeed = '\n';
 
-  RegExp.quote = require('regexp-quote')
-  var btoa = require('btoa')
   // Project configuration.
   grunt.initConfig({
 
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
-              ' * Bootstrap v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-              ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-              ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
+              ' * Bootstrap v3.03 ("http://getbootstrap.com")\n' +
+              ' * Copyright <%= grunt.template.today("yyyy") %> Twitter, Inc.\n' +
+              ' * Licensed under Apache-2.0 , http://www.apache.org/licenses/LICENSE-2.0\n' +
               ' */\n\n',
     jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }\n\n',
+    projectBanner:'/*!\n' +
+              ' * Project Name v<%= pkg.version %>\n' +
+              ' * Copyright <%= grunt.template.today("yyyy") %>  Author goes here\n' +
+              ' */\n\n',
 
-  
-    assetsFolder: {{ASSETS_FOLDER}},
-    bootstrapFolder: {{BOOTSTRAP_FOLDER}},
+    assetsFolder: "{{ASSETS_FOLDER}}",
+    bowerFolder: "<%= assetsFolder %>/{{BOWER_FOLDER}}",
+    bootstrapFolder: "<%= bowerFolder %>/bootstrap",
+    
 
+    
     // Task configuration.
     clean: {
-      dist: ['<%= assetsFolder %>dist']
+      dist: ['<%= assetsFolder %>/dist']
     },
 
     jshint: {
@@ -50,53 +54,60 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       src: {
-        src: ['<%= assetsFolder %>js/*.js']
+        src: ['<%= assetsFolder %>/js/*.js']
       },
       bootstrap:{
-        src: ['<%= bootstrapFolder %>js/*.js']
+        src: ['<%= bootstrapFolder %>/js/*.js']
       }
     },
 
     concat: {
-      options: {
-        banner: '<%= banner %><%= jqueryCheck %>',
-        stripBanners: false
-      },
       assets: {
-        src: ['<%= assetsFolder %>js/*.js'],
-        dest: '<%= assetsFolder %>dist/js/project.js'
+        options: {
+           banner: '<%= projectBanner %>',
+          stripBanners: false
+        },
+        src: ['<%= assetsFolder %>/js/*.js'],
+        dest: '<%= assetsFolder %>/dist/js/project.js'
       },
       bootstrap: {
+        options: {
+           banner: '<%= banner %><%= jqueryCheck %>',
+          stripBanners: false
+        },
         src: [
-          '<%= bootstrapFolder %>js/transition.js',
-          '<%= bootstrapFolder %>js/alert.js',
-          '<%= bootstrapFolder %>js/button.js',
-          '<%= bootstrapFolder %>js/carousel.js',
-          '<%= bootstrapFolder %>js/collapse.js',
-          '<%= bootstrapFolder %>js/dropdown.js',
-          '<%= bootstrapFolder %>js/modal.js',
-          '<%= bootstrapFolder %>js/tooltip.js',
-          '<%= bootstrapFolder %>js/popover.js',
-          '<%= bootstrapFolder %>js/scrollspy.js',
-          '<%= bootstrapFolder %>js/tab.js',
-          '<%= bootstrapFolder %>js/affix.js'
+          '<%= bootstrapFolder %>/js/transition.js',
+          '<%= bootstrapFolder %>/js/alert.js',
+          '<%= bootstrapFolder %>/js/button.js',
+          '<%= bootstrapFolder %>/js/carousel.js',
+          '<%= bootstrapFolder %>/js/collapse.js',
+          '<%= bootstrapFolder %>/js/dropdown.js',
+          '<%= bootstrapFolder %>/js/modal.js',
+          '<%= bootstrapFolder %>/js/tooltip.js',
+          '<%= bootstrapFolder %>/js/popover.js',
+          '<%= bootstrapFolder %>/js/scrollspy.js',
+          '<%= bootstrapFolder %>/js/tab.js',
+          '<%= bootstrapFolder %>/js/affix.js'
         ],
-        dest: '<%= assetsFolder %>dist/js/<%= pkg.name %>.js'
+        dest: '<%= assetsFolder %>/dist/js/<%= pkg.name %>.js'
       }
     },
-
     uglify: {
-      options: {
-        banner: '<%= banner %>',
-        report: 'min'
-      },
       assets: {
+        options: {
+          banner: '<%= projectBanner %>',
+          report: 'min'
+        },
         src: ['<%= concat.assets.dest %>'],
-        dest: '<%= assetsFolder %>dist/js/project.min.js'
+        dest: '<%= assetsFolder %>/dist/js/project.min.js'
       },
       bootstrap: {
+        options: {
+          banner: '<%= banner %>',
+          report: 'min'
+        },
         src: ['<%= concat.bootstrap.dest %>'],
-        dest: '<%= assetsFolder %>dist/js/<%= pkg.name %>.min.js'
+        dest: '<%= assetsFolder %>/dist/js/<%= pkg.name %>.min.js'
       }
     },
 
@@ -107,24 +118,41 @@ module.exports = function(grunt) {
        
       },
       bootstrap: {
-        src: ['<%= assetsFolder %>less/bootstrap.less'],
-        dest: '<%= assetsFolder %>dist/css/<%= pkg.name %>.css'
+        src: ['<%= assetsFolder %>/less/bootstrap.less'],
+        dest: '<%= assetsFolder %>/dist/css/<%= pkg.name %>.css'
       },
       min: {
         options: {
           compress: true      
         },
-        src: ['<%= assetsFolder %>less/bootstrap.less'],
-        dest: '<%= assetsFolder %>dist/css/<%= pkg.name %>.min.css'
+        src: ['<%= assetsFolder %>/less/bootstrap.less'],
+        dest: '<%= assetsFolder %>/dist/css/<%= pkg.name %>.min.css'
+      }
+    },
+    cssmin: {
+      add_banner: {
+        options: {
+          banner: '<%= projectBanner %>'
+        },
+        files: {
+          '<%= assetsFolder %>/dist/css/main.min.css': ['<%= assetsFolder %>/css/**/*.css']
+        }
       }
     },
 
-    copy: {
+    copy: {     
       bootstrap: {
-        cwd: '<%= bootstrapFolder %>',
+        cwd: '<%= bootstrapFolder %>/dist',
         expand: true,
-        src: ["fonts/*"],
-        dest: '<%= assetsFolder %>dist/'
+        src: ["fonts/**"],
+        dest: '<%= assetsFolder %>/dist/'
+      },
+      fontAwesome: {
+        cwd: '<%= bowerFolder %>/font-awesome',
+        expand: true,
+        src: ["fonts/**",
+              "css/**"],
+        dest: '<%= assetsFolder %>/dist/'
       },
        project: {
         cwd: '<%= assetsFolder %>',
@@ -132,9 +160,17 @@ module.exports = function(grunt) {
         src: ['fonts/**',
         'ico/**',
         'images/**',
-        'js/**'],
-        dest: '<%= assetsFolder %>dist/'
-      }
+        'js/**',
+        'css/**'],
+        dest: '<%= assetsFolder %>/dist/'
+      },
+      publishPublic: {
+        cwd: '<%= assetsFolder %>/dist',
+        expand: true,
+        src: ["*/**"],
+        dest: 'public/assets'
+      },
+ 
  
     },
 
@@ -151,16 +187,13 @@ module.exports = function(grunt) {
 
     watch: {
       src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      },
-      recess: {
-        files: '<%= assetsFolder %>less/*.less',
-        tasks: ['recess']
+        files: ['<%= assetsFolder %>/js/*.js',
+        '<%= assetsFolder %>/css/*.css',
+        '<%= assetsFolder %>/fonts/*.*', 
+        '<%= assetsFolder %>/less/*.less', 
+        '<%= assetsFolder %>/images/*.*', 
+        '<%= assetsFolder %>/ico/*.*'],
+        tasks: ['default']
       }
     },
 
@@ -178,6 +211,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  
+  // this is Twitter Bootstraps LESS processor
   grunt.loadNpmTasks('grunt-recess');
 
 
@@ -185,15 +221,17 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-js', ['jshint','concat', 'uglify']);
 
   // CSS distribution task.
-  grunt.registerTask('dist-css', ['recess']);
+  grunt.registerTask('dist-less', ['recess']);
+    // CSS distribution task.
+  grunt.registerTask('dist-css', ['cssmin']);
 
   // Fonts distribution task.
-  grunt.registerTask('dist-fonts', ['copy']);
+  grunt.registerTask('dist-copy', ['copy']);
 
   grunt.registerTask('dist-clean', ['clean']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-fonts', 'dist-js']);
+  grunt.registerTask('dist', ['clean', 'dist-less', 'dist-css', 'dist-js','dist-copy']);
 
   // Default task.
   grunt.registerTask('default', ['dist']);
