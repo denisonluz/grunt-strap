@@ -1,6 +1,12 @@
+# STILL IN DEVELOPMENT
+
+
+## Grunt-Strap  (Grunt - Bower, Bootstrap)
+
 This package provides a quick way to integrate Twitter Bootstrap using Bower, and Grunt, into your Laravel app. 
 
-This package will create an assets folder structure containing a few place holder files to get everything started. It uses the LESS files from Bootstrap.
+This package will create an assets folder structure containing a few place holder files to get everything started. It uses the LESS files from Bootstrap. It's not super flexible, you provide an assests path and folder name for Bower to dump depends. 
+
 
 - `bbg:publish`
 - `bbg:install`
@@ -10,27 +16,25 @@ more coming
 
 ## Installation
 
-* 1 by installing this package through Composer. Edit your project's `composer.json` file to require `donovan/grunt-strap`.
+* Install this package through Composer. Edit your project's `composer.json` file to require `donovan/grunt-strap`.
 
-	"require": {
-		"laravel/framework": "4.0.*",
-		"donovan/grunt-strap": "dev-master"
-	},
-	"minimum-stability" : "dev"
+		"require": {
+			"laravel/framework": "4.0.*",
+			"donovan/grunt-strap": "dev-master"
+		},
+		"minimum-stability" : "dev"
 
 
-* 2 run composer update
+* run composer update
  `composer update`
 
 
 
-* 3 Open `app/config/app.php`, and add a new item to the providers array.
+* Open `app/config/app.php`, and add a new item to the providers array.
 
      'Donovan\GruntStrap\GruntStrapServiceProvider'
 
-* 4 You should now be able to verify everything is installed by running
-
-    `php artisan`
+* You should now be able to verify everything is installed by running `php artisan` and verify there are the `bbg` commands listed at the top. 
     
 ## Usage
 
