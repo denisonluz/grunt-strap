@@ -1,7 +1,7 @@
 # STILL IN DEVELOPMENT
 
 
-## Grunt-Strap  (Grunt - Bower, Bootstrap)
+### Grunt-Strap(Grunt - Bower, Bootstrap)
 
 This package provides a quick way to integrate Twitter Bootstrap using Bower, and Grunt, into your Laravel app. 
 
