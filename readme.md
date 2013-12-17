@@ -1,4 +1,6 @@
-This Laravel 4 package provides a quick way to integrate Twitter Bootstrap using Bower, and Grunt, into your Laravel app:
+This package provides a quick way to integrate Twitter Bootstrap using Bower, and Grunt, into your Laravel app. 
+
+This package will create an assets folder structure containing a few place holder files to get everything started. It uses the LESS files from Bootstrap.
 
 - `bbg:publish`
 - `bbg:install`
@@ -34,6 +36,7 @@ more coming
 
 
 - [bbg:publish](#publish)
+- [bbg:install](#install)
 
 
 ### publish
@@ -67,5 +70,21 @@ the **bootstrap** less file is now your new bootstrap manifest file to control w
 
 
 
+### install
+
+This command will run the following sequences of commands. 
 
 
+
+	bower install
+First we install the bower components, Bootstrap and Font-awesome. 
+
+	sudo npm install
+	
+Then we install Grunt, and all the Grunt dependencies. 
+
+
+	grunt
+
+
+Then we run the grunt.js script for the first time to populate our dist and public folders. 
